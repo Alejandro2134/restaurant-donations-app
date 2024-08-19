@@ -1,0 +1,14 @@
+.order-status {
+  padding: 10px;
+  width: 200px;
+  border-radius: 10px;
+  margin: auto;
+}
+
+.order-status--completed {
+  background-color: #b6cc59;
+}
+
+.order-status--preparation {
+  background-color: #fdcf81;
+}

@@ -1,0 +1,6 @@
+.ingredient-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}

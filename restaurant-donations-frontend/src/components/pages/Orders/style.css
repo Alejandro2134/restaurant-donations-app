@@ -1,0 +1,35 @@
+.orders {
+  flex: 1;
+  border-radius: 20px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #fdcf81;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.place-orders {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.place-bulk-order {
+  margin-left: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.orders-list {
+  margin-top: 10px;
+}
+
+.place-single-order {
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
