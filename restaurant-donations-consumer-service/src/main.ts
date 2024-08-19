@@ -12,6 +12,12 @@ async function bootstrap() {
     options: {
       client: {
         brokers: [KAFKA_BROKER],
+        sasl: {
+          mechanism: 'plain',
+          username: process.env.KAFKA_USERNAME,
+          password: process.env.KAFKA_PASSWORD,
+        },
+        ssl: true,
       },
       consumer: {
         groupId: 'consumer',
