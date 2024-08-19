@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  restaurant-donations-consumer-service:
+    container_name: restaurant-donations-consumer-service
+    image: restaurant-donations-consumer-service
+    build: .
+    environment:
+      KAFKA_BROKER: 'localhost:29092'
+    ports:
+      - 3003:3003

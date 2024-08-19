@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  restaurant-donations-food-storage-service:
+    container_name: restaurant-donations-food-storage-service
+    image: restaurant-donations-food-storage-service
+    build: .
+    environment:
+      KAFKA_BROKER: 'localhost:29092'
+      FOOD_MARKETPLACE_URL: 'https://recruitment.alegra.com/api/farmers-market/buy'
+      DB_HOST_NAME: 'localhost'
+      DB_PORT: 5432
+      DB_USERNAME: 'root'
+      DB_PASSWORD: 'secret'
+      DB_NAME: 'ingredients'
+    ports:
+      - 3002:3002

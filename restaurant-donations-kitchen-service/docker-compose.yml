@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  restaurant-donations-kitchen-service:
+    container_name: restaurant-donations-kitchen-service
+    image: restaurant-donations-kitchen-service
+    build: .
+    environment:
+      KAFKA_BROKER: 'localhost:29092'
+    ports:
+      - 3001:3001
