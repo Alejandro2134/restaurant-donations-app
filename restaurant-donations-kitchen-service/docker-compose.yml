@@ -6,6 +6,8 @@ services:
     image: restaurant-donations-kitchen-service
     build: .
     environment:
-      KAFKA_BROKER: 'localhost:29092'
+      KAFKA_BROKER: 'pkc-921jm.us-east-2.aws.confluent.cloud:9092'
+      KAFKA_USERNAME: '7OJJDXLKQFNFEIXM'
+      KAFKA_PASSWORD: 'rxXQhG61FQQ2PigwiHvJrPdyqA+0dysGah7LcOnLNK/SChbHDTCxM6qxatJm4sip'
     ports:
       - 3001:3001

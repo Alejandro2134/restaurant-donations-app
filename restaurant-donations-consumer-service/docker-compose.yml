@@ -6,6 +6,8 @@ services:
     image: restaurant-donations-consumer-service
     build: .
     environment:
-      KAFKA_BROKER: 'localhost:29092'
+      KAFKA_BROKER: ''
+      KAFKA_USERNAME: ''
+      KAFKA_PASSWORD: ''
     ports:
       - 3003:3003
