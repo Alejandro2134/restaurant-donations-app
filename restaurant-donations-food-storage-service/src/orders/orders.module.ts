@@ -17,6 +17,12 @@ const KAFKA_BROKER = process.env.KAFKA_BROKER || 'localhost:9092';
         options: {
           client: {
             brokers: [KAFKA_BROKER],
+            sasl: {
+              mechanism: 'plain',
+              username: process.env.KAFKA_USERNAME,
+              password: process.env.KAFKA_PASSWORD,
+            },
+            ssl: true,
           },
           consumer: {
             groupId: 'orders-consumer-food-storage',
