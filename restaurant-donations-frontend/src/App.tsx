@@ -153,13 +153,14 @@ function App() {
     socket.on("connect", onConnect);
     socket.on("disconnect", onDisconnect);
     socket.on("order:new", (payload: OrderEventsPayload) => {
-      setOrders(
-        orders.concat({
+      setOrders((prevState) => [
+        ...prevState,
+        {
           status: "Under preparation",
           name: payload.name,
           order_id: payload.order_id,
-        })
-      );
+        },
+      ]);
     });
     socket.on("order:ready", (payload: OrderEventsPayload) => {
       const newOrders = orders.map((order) => {
