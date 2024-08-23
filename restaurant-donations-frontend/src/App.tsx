@@ -163,21 +163,21 @@ function App() {
       ]);
     });
     socket.on("order:ready", (payload: OrderEventsPayload) => {
-      const newOrders = orders.map((order) => {
-        if (order.order_id === payload.order_id) {
-          order.status = "Completed";
-        }
-        return order;
+      setOrders((prevState) => {
+        return prevState.map((order) => {
+          if (order.order_id === payload.order_id) {
+            order.status = "Completed";
+          }
+          return order;
+        });
       });
-
-      setOrders(newOrders);
     });
 
     return () => {
       socket.off("connect", onConnect);
       socket.off("disconnect", onDisconnect);
     };
-  });
+  }, []);
 
   return (
     <div className="app">
