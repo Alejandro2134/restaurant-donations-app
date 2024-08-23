@@ -162,13 +162,14 @@ function App() {
       );
     });
     socket.on("order:ready", (payload: OrderEventsPayload) => {
-      setOrders(
-        orders.concat({
-          status: "Completed",
-          name: payload.name,
-          order_id: payload.order_id,
-        })
-      );
+      const newOrders = orders.map((order) => {
+        if (order.order_id === payload.order_id) {
+          order.status = "Completed";
+        }
+        return order;
+      });
+
+      setOrders(newOrders);
     });
 
     return () => {

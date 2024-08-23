@@ -22,11 +22,14 @@ export class OrdersController {
       this.ordersClient.emit('new-order', {
         value: { ...selectedRecipe, order_id: orderId },
       });
-      await new Promise((resolve) => setTimeout(resolve, 5000));
-      this.ordersClient.emit('order-ready', {
-        value: { ...selectedRecipe, order_id: orderId },
-      });
-      console.log('Order delivered');
+
+      setTimeout(() => {
+        this.ordersClient.emit('order-ready', {
+          value: { ...selectedRecipe, order_id: orderId },
+        });
+
+        console.log('Order delivered');
+      }, 5000);
     }
   }
 }
