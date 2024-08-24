@@ -1,3 +1,7 @@
+### Important Note
+
+I think I made a mistake in the challenge submission form, because I think I added as a link to the app the deployment of one of the first commits I made, if so the link will be composed by some letters and numbers that identify a deployment for a specific commit in Vercel (where the frontend is deployed) e.g: https://restaurant-donations-frontend-7tfc3p54y.vercel.app/ if this is the case you can use this link please: https://restaurant-donations-frontend-app.vercel.app 🥹. Thanks!
+
 ### Restaurant Donations App
 
 This project was made based on the following diagram:
