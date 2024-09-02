@@ -6,7 +6,8 @@ I think I made a mistake in the challenge submission form, because I think I add
 
 This project was made based on the following diagram:
 
-![restaurant app drawio](https://github.com/user-attachments/assets/73db8bcd-e3d9-4aef-bebc-04b2ed7b8240)
+![restaurant app drawio](https://github.com/user-attachments/assets/0b057e74-7569-4edc-a083-3ce78dd6b90d)
+
 
 In this repo you can find the code for the four services represented in the diagram
 
