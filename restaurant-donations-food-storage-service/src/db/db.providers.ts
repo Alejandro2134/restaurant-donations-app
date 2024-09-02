@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import { Ingredient } from 'src/ingredients/models/ingredient.model';
+import { Purchases } from 'src/purchases/models/purchases.model';
 
 export const databaseProviders = [
   {
@@ -18,7 +19,7 @@ export const databaseProviders = [
           },
         },
       });
-      sequelize.addModels([Ingredient]);
+      sequelize.addModels([Ingredient, Purchases]);
       await sequelize.sync();
       return sequelize;
     },

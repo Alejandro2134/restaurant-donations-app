@@ -23,6 +23,9 @@ const KAFKA_BROKER = process.env.KAFKA_BROKER || 'localhost:9092';
             ssl: true,
           },
           producer: {},
+          consumer: {
+            groupId: 'orders-consumer-kitchen-service',
+          },
         },
       },
     ]),

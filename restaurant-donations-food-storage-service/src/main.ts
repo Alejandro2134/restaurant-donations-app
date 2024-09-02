@@ -35,6 +35,10 @@ async function bootstrap() {
       appConstants.SWAGGER_INGREDIENTS_MODULE,
       'Operations related to ingredients',
     )
+    .addTag(
+      appConstants.SWAGGER_PURCHASES_MODULE,
+      'Operations related to purchases',
+    )
     .build();
   const document = SwaggerModule.createDocument(app, config);
 

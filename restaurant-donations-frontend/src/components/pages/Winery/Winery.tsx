@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import IngredientsList from "../../organisms/IngredientsList/IngredientList";
 import "./style.css";
 import Loader from "../../atoms/Loader/Loader";
+import Text from "../../atoms/Text/Text";
+import ShoppingList from "../../organisms/ShoppingList/ShoppingList";
+import Button from "../../atoms/Button/Button";
 
 const foodStorageServiceUrl =
   process.env.REACT_APP_FOOD_STORAGE_SERVICE_URL || "http://localhost:3002";
@@ -24,9 +27,13 @@ type Ingredient = {
   ingredientQty: number;
 };
 
+type Purchases = { name: string; amount: number };
+
 const Winery = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingIngredients, setIsLoadingIngredients] = useState(true);
+  const [isLoadingShoppingList, setIsLoadingShoppingList] = useState(true);
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+  const [shoppingList, setShoppingList] = useState<Purchases[]>([]);
 
   useEffect(() => {
     const getIngredients = async () => {
@@ -47,29 +54,56 @@ const Winery = () => {
           { ingredientName: "chicken", ingredientQty: data.chicken },
         ]);
 
-        setIsLoading(false);
+        setIsLoadingIngredients(false);
       } catch {
-        setIsLoading(false);
+        setIsLoadingIngredients(false);
+      }
+    };
+
+    const getShoppingList = async () => {
+      try {
+        const res = await fetch(`${foodStorageServiceUrl}/purchases`);
+        const data: Purchases[] = await res.json();
+        setShoppingList(data);
+        setIsLoadingShoppingList(false);
+      } catch {
+        setIsLoadingShoppingList(false);
       }
     };
 
     getIngredients();
+    getShoppingList();
 
     return () => {
       setIngredients([]);
+      setShoppingList([]);
     };
   }, []);
 
   return (
-    <>
-      {isLoading ? (
-        <Loader />
+    <div>
+      {isLoadingIngredients ? (
+        <div className="loader">
+          <Loader />
+        </div>
       ) : (
         <div className="winery">
+          <Text isUnderlined={false} text="Ingredients" />
           <IngredientsList ingredients={ingredients} />
         </div>
       )}
-    </>
+
+      {isLoadingShoppingList ? (
+        <div className="loader">
+          <Loader />
+        </div>
+      ) : (
+        <div className="shopping-list">
+          <Text isUnderlined={false} text="Shopping List (Only the last 10)" />
+          <ShoppingList shoppingList={shoppingList} />
+        </div>
+      )}
+    </div>
   );
 };
 

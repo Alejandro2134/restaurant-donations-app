@@ -5,6 +5,7 @@ import { OrdersController } from './controllers/orders.controller';
 import { OrdersService } from './providers/orders.providers';
 import { HttpModule } from '@nestjs/axios';
 import { ingredientsProviders } from 'src/ingredients/ingredients.provider';
+import { purchasesProviders } from 'src/purchases/purchases.provider';
 
 const KAFKA_BROKER = process.env.KAFKA_BROKER || 'localhost:9092';
 
@@ -27,12 +28,13 @@ const KAFKA_BROKER = process.env.KAFKA_BROKER || 'localhost:9092';
           consumer: {
             groupId: 'orders-consumer-food-storage',
           },
+          producer: {},
         },
       },
     ]),
     HttpModule,
   ],
-  providers: [OrdersService, ...ingredientsProviders],
+  providers: [OrdersService, ...ingredientsProviders, ...purchasesProviders],
   controllers: [OrdersController],
 })
 export class OrdersModule {}

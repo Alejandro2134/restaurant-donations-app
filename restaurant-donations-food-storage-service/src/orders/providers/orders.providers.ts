@@ -2,6 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { Inject, Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
 import { Ingredient } from 'src/ingredients/models/ingredient.model';
+import { Purchases } from 'src/purchases/models/purchases.model';
 
 type Ingredients = {
   name: string;
@@ -18,6 +19,7 @@ export class OrdersService implements OnApplicationBootstrap {
     private readonly httpService: HttpService,
     @Inject('INGREDIENT_REPOSITORY')
     private ingredientsRepo: typeof Ingredient,
+    @Inject('PURCHASES_REPOSITORY') private purchasesRepo: typeof Purchases,
   ) {}
 
   async onApplicationBootstrap() {
@@ -51,6 +53,13 @@ export class OrdersService implements OnApplicationBootstrap {
               `${FOOD_MARKETPLACE_URL}?ingredient=${ingredient.name}`,
             ),
           );
+
+          if (data.quantitySold !== 0) {
+            await this.purchasesRepo.create({
+              name: ingredient.name,
+              amount: data.quantitySold,
+            });
+          }
 
           ingredientPurchased = data.quantitySold;
           availableIngredients[ingredient.name] += ingredientPurchased;

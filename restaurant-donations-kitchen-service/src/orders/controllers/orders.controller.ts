@@ -1,9 +1,15 @@
 import { Body, Controller, HttpCode, Inject, Post } from '@nestjs/common';
-import { ClientKafka } from '@nestjs/microservices';
+import { ClientKafka, MessagePattern, Payload } from '@nestjs/microservices';
 import { ApiTags } from '@nestjs/swagger';
 import { appConstants } from 'src/utils/constants';
 import { OrdersService } from '../services/orders.service';
 import { OrdersDTO } from '../dto/orders.dto';
+
+type Message = {
+  name: string;
+  ingredients: { name: string; quantity: number }[];
+  order_id: string;
+};
 
 @ApiTags(appConstants.SWAGGER_ORDERS_MODULE)
 @Controller('orders')
@@ -22,14 +28,17 @@ export class OrdersController {
       this.ordersClient.emit('new-order', {
         value: { ...selectedRecipe, order_id: orderId },
       });
-
-      setTimeout(() => {
-        this.ordersClient.emit('order-ready', {
-          value: { ...selectedRecipe, order_id: orderId },
-        });
-
-        console.log('Order delivered');
-      }, 5000);
     }
+  }
+
+  @MessagePattern('ingredients-ready')
+  async handleIngredientsReady(@Payload() message: Message) {
+    setTimeout(() => {
+      this.ordersClient.emit('order-ready', {
+        value: { ...message },
+      });
+
+      console.log('Order delivered');
+    }, 5000);
   }
 }

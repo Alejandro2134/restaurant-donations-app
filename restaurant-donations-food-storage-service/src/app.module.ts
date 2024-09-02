@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { OrdersModule } from './orders/orders.module';
 import { DatabaseModule } from './db/db.module';
 import { IngredientsModule } from './ingredients/ingredients.module';
+import { PurchasesModule } from './purchases/purchases.module';
 
 @Module({
   imports: [
@@ -10,6 +11,7 @@ import { IngredientsModule } from './ingredients/ingredients.module';
     ConfigModule.forRoot({ isGlobal: true }),
     OrdersModule,
     IngredientsModule,
+    PurchasesModule,
   ],
 })
 export class AppModule {}
